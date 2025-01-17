@@ -8,5 +8,8 @@ public interface CustomerService {
     String registerCustomer(AddCustomerReq addCustomerReq);
     CustomerProfileRes getCustomerProfile(CustomerProfileReq customerProfileReq);
 
+    CustomerProfileRes updateCustomer(CustomerProfileReq customerProfileReq);
+    String deleteCustomer(CustomerProfileReq customerProfileReq);
+
 
 }

@@ -64,7 +64,8 @@ public class CustomerDaoImpl implements CustomersDao {
             preparedStatement.setString(3, addCustomerReq.getEmail());
             preparedStatement.setString(4, addCustomerReq.getAddress());
 
-//            int rowsInserted = preparedStatement.executeUpdate();
+
+            int rowsInserted = preparedStatement.executeUpdate();
 //            System.out.println(rowsInserted + " row(s) inserted.");
             return SUCCESS_MESSAGE;
         } catch (SQLException e) {
@@ -134,7 +135,25 @@ public class CustomerDaoImpl implements CustomersDao {
 
     @Override
     public String deleteCustomer(CustomerProfileReq customerProfileReq) {
-        return null;
+        String deleteSQL = "DELETE FROM customers WHERE email = ? or phone = ?";
+
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL);
+
+            preparedStatement.setString(1,customerProfileReq.getEmail());
+            preparedStatement.setString(2,customerProfileReq.getPhone());
+
+            int rowsInserted = preparedStatement.executeUpdate();
+
+            return "Successfully deleted customer";
+
+
+        } catch (Exception e){
+            return "Error while deleting customer";
+//            System.out.println(e.getMessage());
+        }
+
+//        return null;
     }
 
 

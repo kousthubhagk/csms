@@ -34,5 +34,17 @@ public class CustomerServiceImpl implements CustomerService {
         return response;
     }
 
+    @Override
+    public CustomerProfileRes updateCustomer(CustomerProfileReq customerProfileReq) {
+        return null;
+    }
+
+    @Override
+    public String deleteCustomer(CustomerProfileReq customerProfileReq) {
+        CustomerDaoImpl cust_dao = new CustomerDaoImpl();
+        String response = cust_dao.deleteCustomer(customerProfileReq);
+        return response;
+    }
+
 
 }

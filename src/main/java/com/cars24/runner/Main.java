@@ -72,12 +72,16 @@ public class Main {
 //        dont directly call dao in main
 //        CustomerDaoImpl cust_dao = new CustomerDaoImpl();
         CustomerProfileReq req = new CustomerProfileReq();
-        req.setEmail("john.doe@example.com");
-        req.setPhone("9876543210");
+//        req.setEmail("john.doe@example.com");
+//        req.setPhone("9876543210");
+
+        req.setEmail("dummy.joe@example.com");
+        req.setPhone("9876555555");
 
         CustomerServiceImpl serv = new CustomerServiceImpl();
         CustomerProfileRes response = serv.getCustomerProfile(req);
 
+//        String response = serv.deleteCustomer(req);
 //        CustomerProfileRes response = cust_dao.getCustomer(req);
         System.out.println(response);
 
