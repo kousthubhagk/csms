@@ -37,4 +37,4 @@ build/
 ### Mac OS ###
 .DS_Store
 
-E:\Cars24\Project\CSMS\src\main\java\com\cars24\config\DbConfig.java
+src\main\java\com\cars24\config\*.java
