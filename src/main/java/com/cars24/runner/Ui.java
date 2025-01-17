@@ -9,7 +9,7 @@ public class Ui {
     private static Scanner scanner  = new Scanner(System.in);
     public static void addCustomer()
     {
-        System.out.println("Enter customer details");
+        System.out.println("Enter customer details (Enter after each)");
         AddCustomerReq req = new AddCustomerReq();
 
         req.setName(scanner.next());

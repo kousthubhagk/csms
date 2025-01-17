@@ -2,6 +2,7 @@ package com.cars24.services;
 
 import com.cars24.data.req.AddCustomerReq;
 import com.cars24.data.req.CustomerProfileReq;
+import com.cars24.data.req.DeleteCustomerReq;
 import com.cars24.data.res.CustomerProfileRes;
 
 public interface CustomerService {
@@ -9,7 +10,7 @@ public interface CustomerService {
     CustomerProfileRes getCustomerProfile(CustomerProfileReq customerProfileReq);
 
     CustomerProfileRes updateCustomer(CustomerProfileReq customerProfileReq);
-    String deleteCustomer(CustomerProfileReq customerProfileReq);
+    String deleteCustomer(DeleteCustomerReq deleteCustomerReq);
 
 
 }

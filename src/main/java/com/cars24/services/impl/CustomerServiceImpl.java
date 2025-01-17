@@ -3,6 +3,7 @@ package com.cars24.services.impl;
 import com.cars24.dao.impl.CustomerDaoImpl;
 import com.cars24.data.req.AddCustomerReq;
 import com.cars24.data.req.CustomerProfileReq;
+import com.cars24.data.req.DeleteCustomerReq;
 import com.cars24.data.res.CustomerProfileRes;
 import com.cars24.services.CustomerService;
 import com.cars24.validations.CustomerValidator;
@@ -40,9 +41,9 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public String deleteCustomer(CustomerProfileReq customerProfileReq) {
+    public String deleteCustomer(DeleteCustomerReq deleteCustomerReq) {
         CustomerDaoImpl cust_dao = new CustomerDaoImpl();
-        String response = cust_dao.deleteCustomer(customerProfileReq);
+        String response = cust_dao.deleteCustomer(deleteCustomerReq);
         return response;
     }
 

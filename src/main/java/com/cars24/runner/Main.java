@@ -4,6 +4,7 @@ import com.cars24.config.DbConfig;
 import com.cars24.dao.impl.CustomerDaoImpl;
 import com.cars24.data.req.AddCustomerReq;
 import com.cars24.data.req.CustomerProfileReq;
+import com.cars24.data.req.DeleteCustomerReq;
 import com.cars24.data.res.CustomerProfileRes;
 import com.cars24.services.CustomerService;
 import com.cars24.services.impl.CustomerServiceImpl;
@@ -80,8 +81,12 @@ public class Main {
 
         CustomerServiceImpl serv = new CustomerServiceImpl();
         CustomerProfileRes response = serv.getCustomerProfile(req);
+//        DeleteCustomerReq delreq = new DeleteCustomerReq();
 
-//        String response = serv.deleteCustomer(req);
+//        delreq.setEmail("dummy.joe@example.com");
+//        delreq.setPhone("9876555555");
+//
+//        String response = serv.deleteCustomer(delreq);
 //        CustomerProfileRes response = cust_dao.getCustomer(req);
         System.out.println(response);
 

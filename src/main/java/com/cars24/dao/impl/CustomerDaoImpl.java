@@ -3,6 +3,7 @@ package com.cars24.dao.impl;
 import com.cars24.dao.CustomersDao;
 import com.cars24.data.req.AddCustomerReq;
 import com.cars24.data.req.CustomerProfileReq;
+import com.cars24.data.req.DeleteCustomerReq;
 import com.cars24.data.res.CustomerProfileRes;
 import com.cars24.util.DbUtil;
 
@@ -134,18 +135,20 @@ public class CustomerDaoImpl implements CustomersDao {
     }
 
     @Override
-    public String deleteCustomer(CustomerProfileReq customerProfileReq) {
+    public String deleteCustomer(DeleteCustomerReq deleteCustomerReq) {
         String deleteSQL = "DELETE FROM customers WHERE email = ? or phone = ?";
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(deleteSQL);
 
-            preparedStatement.setString(1,customerProfileReq.getEmail());
-            preparedStatement.setString(2,customerProfileReq.getPhone());
+            preparedStatement.setString(1,deleteCustomerReq.getEmail());
+            preparedStatement.setString(2,deleteCustomerReq.getPhone());
 
             int rowsInserted = preparedStatement.executeUpdate();
 
-            return "Successfully deleted customer";
+            return rowsInserted > 0 ? "Successfully deleted customer" : "Customer not found";
+
+//            return "Successfully deleted customer";
 
 
         } catch (Exception e){
