@@ -11,27 +11,27 @@ import com.cars24.validations.CustomerValidator;
 public class CustomerServiceImpl implements CustomerService {
     CustomerDaoImpl customerDao = new CustomerDaoImpl();
     CustomerValidator customerValidator = new CustomerValidator();
+
     @Override
     public String registerCustomer(AddCustomerReq addCustomerReq) {
         try {
-
-//            CustomerValidator customerValidator = new CustomerValidator();
             customerValidator.validateAddCustomerRequest(addCustomerReq);
-//        check first before creating customer so as to ensure the data is clean
-
             customerDao.createCustomer(addCustomerReq);
-
-
-        }catch(Exception e){
-            System.out.println(e.getMessage());
+            return "Customer registered successfully.";
+        } catch (Exception e) {
+            return "Error during customer registration: " + e.getMessage();
         }
-        return "";
     }
+
 
     @Override
     public CustomerProfileRes getCustomerProfile(CustomerProfileReq customerProfileReq) {
         CustomerDaoImpl cust_dao = new CustomerDaoImpl();
+
+        customerValidator.validateRequest(customerProfileReq);
+
         CustomerProfileRes response = cust_dao.getCustomer(customerProfileReq);
+
         return response;
     }
 
@@ -43,6 +43,9 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public String deleteCustomer(DeleteCustomerReq deleteCustomerReq) {
         CustomerDaoImpl cust_dao = new CustomerDaoImpl();
+
+        customerValidator.validateDeletion(deleteCustomerReq);
+
         String response = cust_dao.deleteCustomer(deleteCustomerReq);
         return response;
     }

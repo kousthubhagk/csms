@@ -81,6 +81,12 @@ public class Main {
 
         CustomerServiceImpl serv = new CustomerServiceImpl();
         CustomerProfileRes response = serv.getCustomerProfile(req);
+        if(response.getName() == null){
+            System.out.println("Record not found");
+        }
+        else{
+            System.out.println(response);
+        }
 //        DeleteCustomerReq delreq = new DeleteCustomerReq();
 
 //        delreq.setEmail("dummy.joe@example.com");
@@ -88,7 +94,7 @@ public class Main {
 //
 //        String response = serv.deleteCustomer(delreq);
 //        CustomerProfileRes response = cust_dao.getCustomer(req);
-        System.out.println(response);
+//        System.out.println(response);
 
 //        implement the toString method here
 
