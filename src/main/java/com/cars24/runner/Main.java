@@ -17,6 +17,61 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        System.out.println("Application starting");
+        Scanner scanner = new Scanner(System.in);
+        boolean exit = true;
+
+        while (exit) {
+            System.out.println("\nChoices:");
+            System.out.println("1: Add User");
+            System.out.println("2: Get User");
+            System.out.println("3: Update User");
+            System.out.println("4: Delete User");
+            System.out.println("0: Exit");
+            System.out.print("Enter your choice: ");
+
+            try {
+                if (!scanner.hasNextInt()) {  // Check if input is an integer
+                    throw new IllegalArgumentException("Input must be a number.");
+                }
+                int choice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline character
+
+                switch (choice) {
+                    case 1 -> Ui.addCustomer();
+                    case 2 -> Ui.getCustomer();
+                    case 3 -> Ui.updateCustomer();
+                    case 4 -> Ui.deleteCustomer();
+                    case 0 -> {
+                        exit = false;
+                        System.out.println("Application exited");
+                    }
+                    default -> System.out.println("Invalid choice. Please enter a number between 0 and 4.");
+                }
+            } catch (IllegalArgumentException e) {
+                System.out.println("Invalid input! Please enter a valid number.");
+                scanner.nextLine(); // Clear invalid input
+            }
+        }
+
+
+        // Close the scanner and database connection
+        scanner.close();
+        DbUtil.closeConnection();
+
+//        System.out.println("Application closing");
+    }
+
+
+
+
+
+
+
+
+
+
+
         /*
         Scanner scanner = new Scanner(System.in);
         boolean exit = true;
@@ -36,7 +91,7 @@ public class Main {
         }
         */
 
-        System.out.println("Application starts");
+
 
 //        try {
 //            DriverManager.getConnection(DbConfig.host, DbConfig.username, DbConfig.password);
@@ -49,7 +104,6 @@ public class Main {
 
 //        CustomerDaoImpl cust_dao = new CustomerDaoImpl();
 //        cust_dao.createCustomer("John Doe", "9876543210", "john.doe@example.com", "Bangalore");
-
 
 
 //        CustomerServiceImpl cust_service = new CustomerServiceImpl();
@@ -69,6 +123,10 @@ public class Main {
 
 
 
+
+
+
+        /*
 
 //        dont directly call dao in main
 //        CustomerDaoImpl cust_dao = new CustomerDaoImpl();
@@ -103,7 +161,7 @@ public class Main {
 
         System.out.println("Application stops");
     }
+    */
 
-
-}
+    }
 

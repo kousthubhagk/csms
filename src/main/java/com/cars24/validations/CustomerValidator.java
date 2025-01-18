@@ -15,47 +15,61 @@ public class CustomerValidator {
     }
 
     public static void validateRequest(CustomerProfileReq customerProfileReq) {
-        validateCustomerPhone(customerProfileReq.getPhone());
-        validateCustomerEmail(customerProfileReq.getEmail());
+        if ((customerProfileReq.getPhone() == null || customerProfileReq.getPhone().isBlank()) &&
+                (customerProfileReq.getEmail() == null || customerProfileReq.getEmail().isBlank())) {
+            throw new IllegalArgumentException("Either phone or email must be provided.");
+        }
+
+        // Validate individually if present
+        if (customerProfileReq.getPhone() != null && !customerProfileReq.getPhone().isBlank()) {
+            validateCustomerPhone(customerProfileReq.getPhone());
+        }
+        if (customerProfileReq.getEmail() != null && !customerProfileReq.getEmail().isBlank()) {
+            validateCustomerEmail(customerProfileReq.getEmail());
+        }
     }
+
 
     public static void validateDeletion(DeleteCustomerReq deleteCustomerReq) {
         validateCustomerPhone(deleteCustomerReq.getPhone());
         validateCustomerEmail(deleteCustomerReq.getEmail());
     }
 
-    private static void validateCustomerName(String name){
-        if (name == null){
-            throw new IllegalArgumentException("Name cannot be EMPTY");
-        }
-        if (name.length() < 3 || name.length() >100){
-            throw new IllegalArgumentException("Name should be min 3 chars or 100 chars max");
-        }
-
-
-    }
-
-    private static void validateCustomerPhone(String phone) {
-        String regex = "^[6789]\\d{9}$";
-        if (!phone.matches(regex)) {
-            throw new IllegalArgumentException("Phone number should start with 6, 7, 8, or 9 and must be 10 digits long.");
+    private static void validateCustomerName(String name) {
+        if (name != null) { // Only validate if the name is provided
+            if (name.length() < 3 || name.length() > 100) {
+                throw new IllegalArgumentException("Name should be min 3 chars or 100 chars max");
+            }
         }
     }
 
-    private static void validateCustomerEmail(String email){
-        String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        if(!email.matches(regex)){
-            throw new IllegalArgumentException("Email id is not valid");
+    public static void validateCustomerPhone(String phone) {
+        if (phone != null) { // Only validate if the phone is provided
+            String regex = "^[6789]\\d{9}$";
+            if (!phone.matches(regex)) {
+                throw new IllegalArgumentException("Phone number should start with 6, 7, 8, or 9 and must be 10 digits long.");
+            }
         }
-//            return "";
+    }
+
+    public static void validateCustomerEmail(String email) {
+        if (email != null) { // Only validate if the email is provided
+            String regex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+            if (!email.matches(regex)) {
+                throw new IllegalArgumentException("Email id is not valid");
+            }
+        }
     }
 
     private static void validateCustomerAddress(String address) {
-        String regex = "^[a-zA-Z0-9\\s,.-]+$";
-        if (!address.matches(regex)) {
-            throw new IllegalArgumentException("Invalid address. Address can include letters, numbers, spaces, commas, periods, and dashes.");
+        if (address != null) { // Only validate if the address is provided
+            String regex = "^[a-zA-Z0-9\\s,.-]+$";
+            if (!address.matches(regex)) {
+                throw new IllegalArgumentException("Invalid address. Address can include letters, numbers, spaces, commas, periods, and dashes.");
+            }
         }
     }
+
 
 
 }

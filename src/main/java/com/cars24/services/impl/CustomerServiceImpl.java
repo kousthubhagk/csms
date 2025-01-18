@@ -26,14 +26,15 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public CustomerProfileRes getCustomerProfile(CustomerProfileReq customerProfileReq) {
-        CustomerDaoImpl cust_dao = new CustomerDaoImpl();
-
-        customerValidator.validateRequest(customerProfileReq);
-
-        CustomerProfileRes response = cust_dao.getCustomer(customerProfileReq);
-
-        return response;
+        try {
+            customerValidator.validateRequest(customerProfileReq);
+            return customerDao.getCustomer(customerProfileReq);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Validation failed: " + e.getMessage());
+            return null; // Null result indicates failure to find customer
+        }
     }
+
 
     @Override
     public CustomerProfileRes updateCustomer(CustomerProfileReq customerProfileReq) {
